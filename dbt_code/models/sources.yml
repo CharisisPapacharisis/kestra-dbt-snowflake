@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+    - name: premier_league_data
+      database: my_db
+      schema: my_schema
+      tables:
+          - name: raw_scorers
+            description: Raw scorers data
+          - name: raw_standings
+            description: Raw standings data           
