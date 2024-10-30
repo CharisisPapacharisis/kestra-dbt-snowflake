@@ -10,4 +10,4 @@ dbt_code:
       type: snowflake
       user: "{{ secret('SNOWFLAKE_USER')}}"
       warehouse: COMPUTE_WH
-  target: "{{ secret('DBT_TARGET', 'dev')}}"
+  target: "{{ secret('DBT_TARGET')}}"
