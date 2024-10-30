@@ -1,0 +1,4 @@
+
+dbt_code/target/
+dbt_code/dbt_packages/
+dbt_code/logs/
