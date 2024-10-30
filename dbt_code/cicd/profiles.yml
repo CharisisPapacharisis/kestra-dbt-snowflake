@@ -3,11 +3,11 @@ dbt_code:
     dev:
       account: ofgerpx-no40481
       database: MY_DB
-      password: "{{ env_var('SNOWFLAKE_PASSWORD')}}"
+      password: "{{ secret('SNOWFLAKE_PASSWORD')}}"
       role: ACCOUNTADMIN
       schema: MY_SCHEMA
       threads: 1
       type: snowflake
-      user: "{{ env_var('SNOWFLAKE_USER')}}"
+      user: "{{ secret('SNOWFLAKE_USER')}}"
       warehouse: COMPUTE_WH
-  target: "{{ env_var('DBT_TARGET', 'dev')}}"
+  target: "{{ secret('DBT_TARGET', 'dev')}}"
