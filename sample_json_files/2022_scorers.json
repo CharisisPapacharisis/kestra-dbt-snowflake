@@ -1,0 +1,345 @@
+{
+    "count": 10,
+    "filters": {
+        "season": 2022,
+        "limit": 10
+    },
+    "competition": {
+        "id": 2021,
+        "name": "Premier League",
+        "code": "PL",
+        "type": "LEAGUE",
+        "emblem": "https://crests.football-data.org/PL.png"
+    },
+    "season": {
+        "id": 1490,
+        "startDate": "2022-08-05",
+        "endDate": "2023-05-28",
+        "currentMatchday": 38,
+        "winner": {
+            "id": 65,
+            "name": "Manchester City FC",
+            "shortName": "Man City",
+            "tla": "MCI",
+            "crest": "https://crests.football-data.org/65.png",
+            "address": "SportCity Manchester M11 3FF",
+            "website": "https://www.mancity.com",
+            "founded": 1880,
+            "clubColors": "Sky Blue / White",
+            "venue": "Etihad Stadium",
+            "lastUpdated": "2022-02-10T19:48:37Z"
+        }
+    },
+    "scorers": [
+        {
+            "player": {
+                "id": 38101,
+                "name": "Erling Haaland",
+                "firstName": "Erling",
+                "lastName": "Haaland",
+                "dateOfBirth": "2000-07-21",
+                "nationality": "Norway",
+                "section": "Centre-Forward",
+                "position": null,
+                "shirtNumber": null,
+                "lastUpdated": "2024-08-23T09:25:15Z"
+            },
+            "team": {
+                "id": 65,
+                "name": "Manchester City FC",
+                "shortName": "Man City",
+                "tla": "MCI",
+                "crest": "https://crests.football-data.org/65.png",
+                "address": "SportCity Manchester M11 3FF",
+                "website": "https://www.mancity.com",
+                "founded": 1880,
+                "clubColors": "Sky Blue / White",
+                "venue": "Etihad Stadium",
+                "lastUpdated": "2022-02-10T19:48:37Z"
+            },
+            "playedMatches": 36,
+            "goals": 36,
+            "assists": 8,
+            "penalties": 7
+        },
+        {
+            "player": {
+                "id": 8004,
+                "name": "Harry Kane",
+                "firstName": "Harry",
+                "lastName": "Kane",
+                "dateOfBirth": "1993-07-28",
+                "nationality": "England",
+                "section": "Centre-Forward",
+                "position": null,
+                "shirtNumber": null,
+                "lastUpdated": "2024-08-12T11:57:09Z"
+            },
+            "team": {
+                "id": 73,
+                "name": "Tottenham Hotspur FC",
+                "shortName": "Tottenham",
+                "tla": "TOT",
+                "crest": "https://crests.football-data.org/73.png",
+                "address": "Bill Nicholson Way, 748 High Road London N17 0AP",
+                "website": "http://www.tottenhamhotspur.com",
+                "founded": 1882,
+                "clubColors": "Navy Blue / White",
+                "venue": "Tottenham Hotspur Stadium",
+                "lastUpdated": "2024-05-11T21:39:03Z"
+            },
+            "playedMatches": 38,
+            "goals": 30,
+            "assists": 3,
+            "penalties": 5
+        },
+        {
+            "player": {
+                "id": 5453,
+                "name": "Ivan Toney",
+                "firstName": "Ivan",
+                "lastName": "Toney",
+                "dateOfBirth": "1996-03-16",
+                "nationality": "England",
+                "section": "Centre-Forward",
+                "position": null,
+                "shirtNumber": null,
+                "lastUpdated": "2024-08-23T09:25:16Z"
+            },
+            "team": {
+                "id": 402,
+                "name": "Brentford FC",
+                "shortName": "Brentford",
+                "tla": "BRE",
+                "crest": "https://crests.football-data.org/402.png",
+                "address": "Braemar Road Brentford TW8 0NT",
+                "website": "http://www.brentfordfc.co.uk",
+                "founded": 1889,
+                "clubColors": "Red / White / Black",
+                "venue": "Griffin Park",
+                "lastUpdated": "2022-04-03T16:24:00Z"
+            },
+            "playedMatches": 33,
+            "goals": 20,
+            "assists": 4,
+            "penalties": 6
+        },
+        {
+            "player": {
+                "id": 3754,
+                "name": "Mohamed Salah",
+                "firstName": "Mo",
+                "lastName": "Salah",
+                "dateOfBirth": "1992-06-15",
+                "nationality": "Egypt",
+                "section": "Right Winger",
+                "position": null,
+                "shirtNumber": null,
+                "lastUpdated": "2024-08-23T09:25:15Z"
+            },
+            "team": {
+                "id": 64,
+                "name": "Liverpool FC",
+                "shortName": "Liverpool",
+                "tla": "LIV",
+                "crest": "https://crests.football-data.org/64.png",
+                "address": "Anfield Road Liverpool L4 0TH",
+                "website": "http://www.liverpoolfc.tv",
+                "founded": 1892,
+                "clubColors": "Red / White",
+                "venue": "Anfield",
+                "lastUpdated": "2022-02-10T19:30:22Z"
+            },
+            "playedMatches": 38,
+            "goals": 19,
+            "assists": 12,
+            "penalties": 2
+        },
+        {
+            "player": {
+                "id": 8251,
+                "name": "Callum Wilson",
+                "firstName": "Callum",
+                "lastName": "Wilson",
+                "dateOfBirth": "1992-02-27",
+                "nationality": "England",
+                "section": "Centre-Forward",
+                "position": null,
+                "shirtNumber": null,
+                "lastUpdated": "2024-08-23T09:25:15Z"
+            },
+            "team": {
+                "id": 67,
+                "name": "Newcastle United FC",
+                "shortName": "Newcastle",
+                "tla": "NEW",
+                "crest": "https://crests.football-data.org/67.png",
+                "address": "Sports Direct Arena Newcastle upon Tyne NE1 4ST",
+                "website": "http://www.nufc.co.uk",
+                "founded": 1881,
+                "clubColors": "Black / White",
+                "venue": "St. James' Park",
+                "lastUpdated": "2022-09-28T18:51:07Z"
+            },
+            "playedMatches": 32,
+            "goals": 18,
+            "assists": 5,
+            "penalties": 3
+        },
+        {
+            "player": {
+                "id": 3331,
+                "name": "Marcus Rashford",
+                "firstName": "Marcus",
+                "lastName": "Rashford",
+                "dateOfBirth": "1997-10-31",
+                "nationality": "England",
+                "section": "Left Winger",
+                "position": null,
+                "shirtNumber": null,
+                "lastUpdated": "2024-08-23T09:25:15Z"
+            },
+            "team": {
+                "id": 66,
+                "name": "Manchester United FC",
+                "shortName": "Man United",
+                "tla": "MUN",
+                "crest": "https://crests.football-data.org/66.png",
+                "address": "Sir Matt Busby Way Manchester M16 0RA",
+                "website": "http://www.manutd.com",
+                "founded": 1878,
+                "clubColors": "Red / White",
+                "venue": "Old Trafford",
+                "lastUpdated": "2022-02-10T19:27:46Z"
+            },
+            "playedMatches": 35,
+            "goals": 17,
+            "assists": 5,
+            "penalties": null
+        },
+        {
+            "player": {
+                "id": 61450,
+                "name": "Martinelli",
+                "firstName": "",
+                "lastName": "Gabriel Martinelli",
+                "dateOfBirth": "2001-06-18",
+                "nationality": "Brazil",
+                "section": "Left Winger",
+                "position": null,
+                "shirtNumber": null,
+                "lastUpdated": "2024-08-23T09:25:15Z"
+            },
+            "team": {
+                "id": 57,
+                "name": "Arsenal FC",
+                "shortName": "Arsenal",
+                "tla": "ARS",
+                "crest": "https://crests.football-data.org/57.png",
+                "address": "75 Drayton Park London N5 1BU",
+                "website": "http://www.arsenal.com",
+                "founded": 1886,
+                "clubColors": "Red / White",
+                "venue": "Emirates Stadium",
+                "lastUpdated": "2022-02-10T19:48:56Z"
+            },
+            "playedMatches": 36,
+            "goals": 15,
+            "assists": 5,
+            "penalties": null
+        },
+        {
+            "player": {
+                "id": 4444,
+                "name": "Ollie Watkins",
+                "firstName": "Ollie",
+                "lastName": "Watkins",
+                "dateOfBirth": "1995-12-30",
+                "nationality": "England",
+                "section": "Centre-Forward",
+                "position": null,
+                "shirtNumber": null,
+                "lastUpdated": "2024-08-23T09:25:15Z"
+            },
+            "team": {
+                "id": 58,
+                "name": "Aston Villa FC",
+                "shortName": "Aston Villa",
+                "tla": "AVL",
+                "crest": "https://crests.football-data.org/58.png",
+                "address": "Villa Park Birmingham B6 6HE",
+                "website": "http://www.avfc.co.uk",
+                "founded": 1872,
+                "clubColors": "Claret / Sky Blue",
+                "venue": "Villa Park",
+                "lastUpdated": "2022-04-03T16:22:14Z"
+            },
+            "playedMatches": 37,
+            "goals": 15,
+            "assists": 6,
+            "penalties": 1
+        },
+        {
+            "player": {
+                "id": 7427,
+                "name": "Martin Ødegaard",
+                "firstName": "Martin",
+                "lastName": "Ødegaard",
+                "dateOfBirth": "1998-12-17",
+                "nationality": "Norway",
+                "section": "Attacking Midfield",
+                "position": null,
+                "shirtNumber": null,
+                "lastUpdated": "2024-08-23T09:25:15Z"
+            },
+            "team": {
+                "id": 57,
+                "name": "Arsenal FC",
+                "shortName": "Arsenal",
+                "tla": "ARS",
+                "crest": "https://crests.football-data.org/57.png",
+                "address": "75 Drayton Park London N5 1BU",
+                "website": "http://www.arsenal.com",
+                "founded": 1886,
+                "clubColors": "Red / White",
+                "venue": "Emirates Stadium",
+                "lastUpdated": "2022-02-10T19:48:56Z"
+            },
+            "playedMatches": 37,
+            "goals": 15,
+            "assists": 8,
+            "penalties": null
+        },
+        {
+            "player": {
+                "id": 3445,
+                "name": "Aleksandar Mitrović",
+                "firstName": "Aleksandar",
+                "lastName": "Mitrović",
+                "dateOfBirth": "1994-09-16",
+                "nationality": "Serbia",
+                "section": "Centre-Forward",
+                "position": null,
+                "shirtNumber": null,
+                "lastUpdated": "2024-08-23T09:25:15Z"
+            },
+            "team": {
+                "id": 63,
+                "name": "Fulham FC",
+                "shortName": "Fulham",
+                "tla": "FUL",
+                "crest": "https://crests.football-data.org/63.png",
+                "address": "Craven Cottage, Stevenage Road London SW6 6HH",
+                "website": "http://www.fulhamfc.com",
+                "founded": 1879,
+                "clubColors": "White / Black",
+                "venue": "Craven Cottage",
+                "lastUpdated": "2024-07-29T17:16:11Z"
+            },
+            "playedMatches": 24,
+            "goals": 14,
+            "assists": 1,
+            "penalties": 4
+        }
+    ]
+}

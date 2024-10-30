@@ -1,0 +1,94 @@
+id: kestra_premier_league_flow
+namespace: my.project
+tasks:
+  - id: fetch_scorers
+    type: io.kestra.plugin.core.http.Download
+    method: GET
+    uri: https://api.football-data.org/v4/competitions/PL/scorers?season=2022
+    headers:
+      X-Auth-Token: "{{secret('API_TOKEN')}}"
+
+  - id: upload_scorers_to_s3
+    type: io.kestra.plugin.aws.s3.Upload
+    bucket: charisis-test-1
+    from: "{{ outputs.fetch_scorers.uri }}"
+    accessKeyId: "{{secret('AWS_ACCESS_KEY_ID')}}"
+    secretKeyId: "{{secret('AWS_SECRET_KEY_ID')}}"
+    region: eu-west-1
+    key: premier-league/scorers/2022_scorers.json
+
+  - id: copy_scorers_to_snowflake
+    type: io.kestra.plugin.jdbc.snowflake.Query
+    description: Copy data from S3 to Snowflake
+    url: "{{secret('SNOWFLAKE_URL')}}"
+    username: "{{secret('SNOWFLAKE_USERNAME')}}"
+    password: "{{secret('SNOWFLAKE_PASSWORD')}}"
+    warehouse: COMPUTE_WH
+    database: MY_DB
+    schema: MY_SCHEMA
+    sql: |
+      copy into raw_scorers
+      from @my_s3_stage/premier-league/scorers/
+      FILE_FORMAT = (TYPE = 'JSON');
+
+  - id: fetch_standings
+    type: io.kestra.plugin.core.http.Download
+    uri: https://api.football-data.org/v4/competitions/PL/standings?season=2022
+    headers:
+      X-Auth-Token: "{{secret('API_TOKEN')}}"
+
+  - id: upload_standings_to_s3
+    type: io.kestra.plugin.aws.s3.Upload
+    accessKeyId: "{{secret('AWS_ACCESS_KEY_ID')}}"
+    secretKeyId: "{{secret('AWS_SECRET_KEY_ID')}}"
+    bucket: charisis-test-1
+    region: eu-west-1
+    key: premier-league/standings/2022_standings.json
+    from: '{{outputs.fetch_standings.uri}}'
+
+  - id: copy_standings_to_snowflake
+    type: io.kestra.plugin.jdbc.snowflake.Query
+    description: Copy data from S3 to Snowflake
+    url: "{{secret('SNOWFLAKE_URL')}}"
+    username: "{{secret('SNOWFLAKE_USERNAME')}}"
+    password: "{{secret('SNOWFLAKE_PASSWORD')}}"
+    warehouse: COMPUTE_WH
+    database: MY_DB
+    schema: MY_SCHEMA
+    sql: |
+      copy into raw_standings
+      from @my_s3_stage/premier-league/standings/
+      FILE_FORMAT = (TYPE = 'JSON');
+
+  - id: clone_and_run_dbt
+    type: io.kestra.plugin.core.flow.WorkingDirectory
+    tasks:
+      - id: clone_dbt_repo
+        type: io.kestra.plugin.git.Clone
+        url: https://github.com/CharisisPapacharisis/kestra-dbt-snowflake
+        branch: main
+        username: "{{secret('GITHUB_USERNAME')}}"
+        password: "{{secret('GITHUB_PAT')}}"
+
+      - id: run_dbt
+        type: io.kestra.plugin.dbt.cli.DbtCLI
+        runner: DOCKER
+        docker:
+          image: ghcr.io/dbt-labs/dbt-snowflake:1.8.3
+        commands:
+          - dbt deps
+          - dbt build
+        profiles: |
+          dbt_code:
+            outputs:
+              dev:
+                account: "{{secret('SNOWFLAKE_ACCOUNT')}}"
+                database: MY_DB
+                password: "{{secret('SNOWFLAKE_PASSWORD')}}"
+                role: ACCOUNTADMIN
+                schema: MY_SCHEMA
+                threads: 1
+                type: snowflake
+                user: "{{secret('SNOWFLAKE_USERNAME')}}"
+                warehouse: COMPUTE_WH
+            target: dev

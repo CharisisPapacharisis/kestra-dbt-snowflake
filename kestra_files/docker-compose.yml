@@ -1,0 +1,72 @@
+volumes:
+  postgres-data:
+    driver: local
+  kestra-data:
+    driver: local
+
+services:
+  postgres:
+    image: postgres:17 # Use a specific version of PostgreSQL to avoid compatibility issues
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: kestra
+      POSTGRES_USER: kestra
+      POSTGRES_PASSWORD: k3str4
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d kestra -U kestra"] 
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  kestra:
+    image: kestra/kestra:v0.17.10-full # Use a specific version of PostgreSQL to avoid compatibility issues
+    pull_policy: always
+    user: "root"
+    command: server standalone
+    volumes:
+      - kestra-data:/app/storage
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /tmp/kestra-wd:/tmp/kestra-wd
+    environment:  # provide secrets in base64-encoding
+      SECRET_DBT_TARGET: XXXXXX
+      SECRET_SNOWFLAKE_PASSWORD: XXXXXX
+      SECRET_SNOWFLAKE_USERNAME: XXXXXX
+      SECRET_SNOWFLAKE_URL: XXXXXX
+      SECRET_SNOWFLAKE_ACCOUNT: XXXXXX
+      SECRET_API_TOKEN: XXXXXX
+      SECRET_AWS_ACCESS_KEY_ID: XXXXXX
+      SECRET_AWS_SECRET_KEY_ID: XXXXXX
+      SECRET_GITHUB_USERNAME: XXXXXX
+      SECRET_GITHUB_PAT: XXXXXX
+      KESTRA_CONFIGURATION: |
+        datasources:
+          postgres:
+            url: jdbc:postgresql://postgres:5432/kestra
+            driverClassName: org.postgresql.Driver
+            username: kestra
+            password: k3str4
+        kestra:
+          server:
+            basic-auth:
+              enabled: false
+              username: "admin@kestra.io" # it must be a valid email address
+              password: kestra
+          repository:
+            type: postgres
+          storage:
+            type: local
+            local:
+              base-path: "/app/storage"
+          queue:
+            type: postgres
+          tasks:
+            tmp-dir:
+              path: /tmp/kestra-wd/tmp
+          url: http://localhost:8080/
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    depends_on:
+      postgres:
+        condition: service_healthy
