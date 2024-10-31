@@ -166,20 +166,14 @@ echo -n "secretValue" | base64
 3. **Snowflake Access**
 
 - Snowflake Account & Access Credentials: We obtain a Snowflake account and create a user with the necessary role and permissions to access the database and schema that we will use for testing.
+
 - This repo includes an SQL file with the required commands for setting up the Database, Schema, a Storage Integration from Snowflake to S3, as well as an External Stage in Snowflake. The `Storage Integration` between the S3 data lake and Snowflake is what allows us to ingest all data into the RAW schema of Snowflake, via the *COPY INTO* command.
+
 - Kestra will access Snowflake thanks to its `io.kestra.plugin.jdbc.snowflake` plugin. Similar to above, we can set up variables for the Snowflake account/URL/username/password, in our `docker-compose.yml` configuration, in order to avoid hardcoding these sensitive values directly into the Kestra flow yml.
 
 4. **dbt Integration**
 
-- *Local Development*: To firstly develop in dbt locally, it is recommended to create a Python virtual environment in our computer, to isolate dependencies. After we activate it, we can install dbt together with its Snowflake connector.
-
-```bash
-pip install dbt-snowflake
-```
-    This way, we will be able to run transformations independently before configuring them in Kestra. 
-    We also need to setup our `local profiles.yml` file accordingly, so that dbt can connect to our Snowflake instance.
-    Then, we navigate to the root of the dbt project, and we can test/run all models. 
-    E.g. the command `dbt run`, will create all models from staging to mart, respecting the dependencies. We can generate the dependency graph of the models, via the commands `"dbt docs generate"` / `dbt docs serve`.
+- *Local Development*: To firstly develop in dbt locally, it is recommended to create a Python virtual environment in our computer, to isolate dependencies. After we activate it, we can install dbt together with its Snowflake connector: `pip install dbt-snowflake`. This way, we will be able to run transformations independently before configuring them in Kestra. We also need to setup our `local profiles.yml` file accordingly, so that dbt can connect to our Snowflake instance. Then, we navigate to the root of the dbt project, and we can test/run all models. E.g. the command `dbt run`, will create all models from staging to mart, respecting the dependencies. We can generate the dependency graph of the models, via the commands `"dbt docs generate"` / `dbt docs serve`.
 
 - *GitHub Access for dbt Project*: We want our Kestra local server to be able to access our dbt project that is stored in GitHub. To access the GitHub repository, we create a *personal access token*, and pass it also in the docker-compose configuration of the Kestra server, with based64 encoding. Kestra will access the repository via its `io.kestra.plugin.git` plugin, and run the dbt code thanks to the `io.kestra.plugin.dbt.cli` plugin. The dbt `profiles.yml` configuration can be provided directly within the dbt task of the Kestra flow, and any sensitive values will be added in the docker-compose yml configuration, and then passed via the Kestra "secrets" functionality into the task.
 
