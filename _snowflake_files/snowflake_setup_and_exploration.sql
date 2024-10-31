@@ -16,8 +16,8 @@ CREATE OR REPLACE STORAGE INTEGRATION my_s3_integration
   TYPE = EXTERNAL_STAGE
   STORAGE_PROVIDER = 'S3'
   ENABLED = TRUE
-  STORAGE_AWS_ROLE_ARN = 'arn:aws:iam::XXXXXXXXX:role/charisis-snowflake-role'
-  STORAGE_ALLOWED_LOCATIONS = ('s3://charisis-data-lake/');
+  STORAGE_AWS_ROLE_ARN = 'arn:aws:iam::XXXXXXXXX:role/my-snowflake-role'
+  STORAGE_ALLOWED_LOCATIONS = ('s3://my-data-lake/');
 
   --describe integration
 DESCRIBE INTEGRATION my_s3_integration;
@@ -25,7 +25,7 @@ DESCRIBE INTEGRATION my_s3_integration;
 -- create s3 stage
 CREATE OR REPLACE STAGE my_s3_stage
   STORAGE_INTEGRATION = my_s3_integration
-  URL = 's3://charisis-data-lake';
+  URL = 's3://my-data-lake';
 
 -- list files included under the stage
 LIST @my_s3_stage;

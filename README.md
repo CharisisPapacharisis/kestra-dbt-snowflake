@@ -72,9 +72,9 @@ I updated/pinned the image versions of the Kestra and PostgreSQL images, to avoi
 
 3. **AWS Access**
 
-We create an *S3 bucket* (e.g. `charisis-data-lake`), as well as an IAM user (e.g. `kestra-IAM-user`) with credentials (Access Key ID & Secret Access Key), which will be used by Kestra to access S3. The IAM user should have permissions to write to the data lake / S3 bucket. These permissions can be managed by the Bucket Policy of the S3 bucket.
+We create an *S3 bucket* (e.g. `my-data-lake`), as well as an IAM user (e.g. `kestra-IAM-user`) with credentials (Access Key ID & Secret Access Key), which will be used by Kestra to access S3. The IAM user should have permissions to write to the data lake / S3 bucket. These permissions can be managed by the Bucket Policy of the S3 bucket.
 
-Moreover, we create an *IAM Role*, which will be used for creating the Snowflake -> S3 integration. This role (e.g. `charisis-snowflake-role`), also needs access to the S3 bucket, so that Snowflake can read from S3. We can manage that via the S3 Bucket Policy (or by creating a relevant IAM Policy and by assigning that IAM Policy to the IAM Role). We will also need to adapt the "trust relationships" of the IAM Role, for the Snowflake Storage Integration to take effect, as per the guidelines: Specifically, we need to *"Describe the integration"* in Snowflake, and make use of the `STORAGE_AWS_IAM_USER_ARN` and `STORAGE_AWS_EXTERNAL_ID` that appear, to update the trust relationship of the AWS IAM Role.
+Moreover, we create an *IAM Role*, which will be used for creating the Snowflake -> S3 integration. This role (e.g. `my-snowflake-role`), also needs access to the S3 bucket, so that Snowflake can read from S3. We can manage that via the S3 Bucket Policy (or by creating a relevant IAM Policy and by assigning that IAM Policy to the IAM Role). We will also need to adapt the "trust relationships" of the IAM Role, for the Snowflake Storage Integration to take effect, as per the guidelines: Specifically, we need to *"Describe the integration"* in Snowflake, and make use of the `STORAGE_AWS_IAM_USER_ARN` and `STORAGE_AWS_EXTERNAL_ID` that appear, to update the trust relationship of the AWS IAM Role.
 
 
 Example of the **Bucket Policy** for the S3 bucket:
@@ -89,7 +89,7 @@ Example of the **Bucket Policy** for the S3 bucket:
                 "AWS": "arn:aws:iam::XXXXXXXXXXXX:user/kestra-IAM-user"
             },
             "Action": "s3:ListBucket",
-            "Resource": "arn:aws:s3:::charisis-data-lake"
+            "Resource": "arn:aws:s3:::my-data-lake"
         },
         {
             "Effect": "Allow",
@@ -103,13 +103,13 @@ Example of the **Bucket Policy** for the S3 bucket:
                 "s3:PutObject",
                 "s3:DeleteObject"
             ],
-            "Resource": "arn:aws:s3:::charisis-data-lake/*"
+            "Resource": "arn:aws:s3:::my-data-lake/*"
         },
         {
             "Effect": "Allow",
             "Principal": 
             {
-                "AWS": "arn:aws:iam::XXXXXXXXXXXX:role/charisis-snowflake-role"
+                "AWS": "arn:aws:iam::XXXXXXXXXXXX:role/my-snowflake-role"
             },
             "Action": 
             [
@@ -118,8 +118,8 @@ Example of the **Bucket Policy** for the S3 bucket:
             ],
             "Resource": 
             [
-                "arn:aws:s3:::charisis-data-lake",
-                "arn:aws:s3:::charisis-data-lake/*"
+                "arn:aws:s3:::my-data-lake",
+                "arn:aws:s3:::my-data-lake/*"
             ]
         }
     ]
@@ -127,7 +127,7 @@ Example of the **Bucket Policy** for the S3 bucket:
 ```
 
 
-Example of the **IAM Policy** that could be created (e.g. `access-to-charisis-s3-bucket`):
+Example of the **IAM Policy** that could be created (e.g. `access-to-my-s3-bucket`):
 ```bash
 {
     "Version": "2012-10-17",
@@ -137,7 +137,7 @@ Example of the **IAM Policy** that could be created (e.g. `access-to-charisis-s3
             "Action": [
                 "s3:ListBucket"
             ],
-            "Resource": "arn:aws:s3:::charisis-data-lake"
+            "Resource": "arn:aws:s3:::my-data-lake"
         },
         {
             "Effect": "Allow",
@@ -149,7 +149,7 @@ Example of the **IAM Policy** that could be created (e.g. `access-to-charisis-s3
                 "s3:GetObjectAcl",
                 "s3:DeleteObjectVersion"
             ],
-            "Resource": "arn:aws:s3:::charisis-data-lake/*"
+            "Resource": "arn:aws:s3:::my-data-lake/*"
         }
     ]
 }
