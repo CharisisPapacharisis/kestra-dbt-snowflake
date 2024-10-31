@@ -1,5 +1,11 @@
 id: kestra_premier_league_flow
 namespace: my.project
+
+triggers:
+  - id: schedule_trigger
+    type: io.kestra.plugin.core.trigger.Schedule
+    cron: "*/5 * * * *"
+
 tasks:
   - id: fetch_scorers
     type: io.kestra.plugin.core.http.Download
@@ -7,6 +13,12 @@ tasks:
     uri: https://api.football-data.org/v4/competitions/PL/scorers?season=2022
     headers:
       X-Auth-Token: "{{secret('API_TOKEN')}}"
+    retry:
+      type: constant
+      interval: PT10S
+      maxAttempt: 3
+      maxDuration: PT1M
+      warningOnRetry: false
 
   - id: upload_scorers_to_s3
     type: io.kestra.plugin.aws.s3.Upload
@@ -36,6 +48,12 @@ tasks:
     uri: https://api.football-data.org/v4/competitions/PL/standings?season=2022
     headers:
       X-Auth-Token: "{{secret('API_TOKEN')}}"
+    retry:
+      type: constant
+      interval: PT10S
+      maxAttempt: 3
+      maxDuration: PT1M
+      warningOnRetry: false
 
   - id: upload_standings_to_s3
     type: io.kestra.plugin.aws.s3.Upload
