@@ -29,7 +29,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /tmp/kestra-wd:/tmp/kestra-wd
     environment:  # provide secrets in base64-encoding
-      SECRET_DBT_TARGET: XXXXXX
       SECRET_SNOWFLAKE_PASSWORD: XXXXXX
       SECRET_SNOWFLAKE_USERNAME: XXXXXX
       SECRET_SNOWFLAKE_URL: XXXXXX
