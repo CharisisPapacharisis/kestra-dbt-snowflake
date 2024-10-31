@@ -6,7 +6,7 @@ volumes:
 
 services:
   postgres:
-    image: postgres:17 # Use a specific version of PostgreSQL to avoid compatibility issues
+    image: postgres:17 # Use a specific version of PostgreSQL image to avoid compatibility issues
     volumes:
       - postgres-data:/var/lib/postgresql/data
     environment:
@@ -20,7 +20,7 @@ services:
       retries: 5
 
   kestra:
-    image: kestra/kestra:v0.17.10-full # Use a specific version of PostgreSQL to avoid compatibility issues
+    image: kestra/kestra:v0.17.10-full # Use a specific version of Kestra image to avoid compatibility issues
     pull_policy: always
     user: "root"
     command: server standalone
